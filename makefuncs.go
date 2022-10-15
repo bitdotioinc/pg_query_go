@@ -144,6 +144,19 @@ func MakeFuncCallNode(funcname []*Node, args []*Node, location int32) *Node {
 	}
 }
 
+func MakeFuncCallNodeWithFormat(funcname []*Node, args []*Node, funcformat string, location int32) *Node {
+	return &Node{
+		Node: &Node_FuncCall{
+			FuncCall: &FuncCall{
+				Funcname:   funcname,
+				Funcformat: CoercionForm(CoercionForm_value[funcformat]),
+				Args:       args,
+				Location:   location,
+			},
+		},
+	}
+}
+
 func MakeJoinExprNode(jointype JoinType, larg *Node, rarg *Node, quals *Node) *Node {
 	return &Node{
 		Node: &Node_JoinExpr{
