@@ -3,8 +3,8 @@ package pg_query_test
 import (
 	"testing"
 
-	pg_query "github.com/bitdotioinc/pg_query_go/pg14"
-	"github.com/bitdotioinc/pg_query_go/pg14/parser"
+	pg_query "github.com/bitdotioinc/pg_query_go/v3.0.0"
+	"github.com/bitdotioinc/pg_query_go/v3.0.0/parser"
 )
 
 // Prevent compiler optimizations by assigning all results to global variables
