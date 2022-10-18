@@ -7,7 +7,7 @@ import (
 	"strconv"
 	"testing"
 
-	pg_query "github.com/bitdotioinc/pg_query_go/pg14"
+	pg_query "github.com/bitdotioinc/pg_query_go/v3.0.0"
 )
 
 type fingerprintTest struct {
