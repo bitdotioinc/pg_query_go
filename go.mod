@@ -1,6 +1,6 @@
-module github.com/bitdotioinc/pg_query_go/v3.0.0
+module github.com/bitdotioinc/pg_query_go/v2
 
-go 1.10
+go 1.14
 
 require (
 	github.com/golang/protobuf v1.4.2

@@ -7,7 +7,7 @@ import (
 	"sync"
 	"testing"
 
-	pg_query "github.com/bitdotioinc/pg_query_go/v3.0.0"
+	pg_query "github.com/bitdotioinc/pg_query_go/v2"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/protobuf/testing/protocmp"
 )
