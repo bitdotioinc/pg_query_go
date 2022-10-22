@@ -31,6 +31,19 @@ func init() {
 	C.pg_query_init()
 }
 
+type ParseError struct {
+	Message string
+	Pos     int //1 indexed to the origin parse string
+}
+
+func NewParseError(msg string, pos int) *ParseError {
+	return &ParseError{Message: msg, Pos: pos}
+}
+
+func (e *ParseError) Error() string {
+	return e.Message
+}
+
 // ParseToJSON - Parses the given SQL statement into a parse tree (JSON format)
 func ParseToJSON(input string) (result string, err error) {
 	inputC := C.CString(input)
@@ -42,7 +55,8 @@ func ParseToJSON(input string) (result string, err error) {
 
 	if resultC.error != nil {
 		errMessage := C.GoString(resultC.error.message)
-		err = errors.New(errMessage)
+		errPos := int(resultC.error.cursorpos)
+		err = NewParseError(errMessage, errPos)
 		return
 	}
 
@@ -61,7 +75,8 @@ func ScanToProtobuf(input string) (result []byte, err error) {
 
 	if resultC.error != nil {
 		errMessage := C.GoString(resultC.error.message)
-		err = errors.New(errMessage)
+		errPos := int(resultC.error.cursorpos)
+		err = NewParseError(errMessage, errPos)
 		return
 	}
 
@@ -81,7 +96,8 @@ func ParseToProtobuf(input string) (result []byte, err error) {
 
 	if resultC.error != nil {
 		errMessage := C.GoString(resultC.error.message)
-		err = errors.New(errMessage)
+		errPos := int(resultC.error.cursorpos)
+		err = NewParseError(errMessage, errPos)
 		return
 	}
 
@@ -121,7 +137,8 @@ func ParsePlPgSqlToJSON(input string) (result string, err error) {
 
 	if resultC.error != nil {
 		errMessage := C.GoString(resultC.error.message)
-		err = errors.New(errMessage)
+		errPos := int(resultC.error.cursorpos)
+		err = NewParseError(errMessage, errPos)
 		return
 	}
 

@@ -1,13 +1,13 @@
 package pg_query_test
 
 import (
-	"errors"
 	"fmt"
 	"reflect"
 	"sync"
 	"testing"
 
 	pg_query "github.com/bitdotioinc/pg_query_go/v2"
+	parser "github.com/bitdotioinc/pg_query_go/v2/parser"
 	"github.com/google/go-cmp/cmp"
 	"google.golang.org/protobuf/testing/protocmp"
 )
@@ -549,11 +549,11 @@ var parseErrorTests = []struct {
 }{
 	{
 		"SELECT $",
-		errors.New("syntax error at or near \"$\""),
+		parser.NewParseError("syntax error at or near \"$\"", 8),
 	},
 	{
 		"SELECT * FROM y WHERE x IN (3, ",
-		errors.New("syntax error at end of input"),
+		parser.NewParseError("syntax error at end of input", 32),
 	},
 }
 
